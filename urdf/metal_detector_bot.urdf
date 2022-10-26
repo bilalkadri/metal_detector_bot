@@ -431,6 +431,8 @@
       <odometryTopic>/odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <robotBaseFrame>base_link</robotBaseFrame>
+      <publishWheelTF>true</publishWheelTF>
+      <publishOdomTF>true</publishOdomTF>
     </plugin>
 
   <plugin name="gazebo_ros_control" filename="libgazebo_ros_contol.so">
