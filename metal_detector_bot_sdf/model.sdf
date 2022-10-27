@@ -26,8 +26,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/base_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -114,8 +120,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Back_left_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -202,8 +214,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Back_right_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -290,8 +308,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Front_left_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -378,8 +402,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Front_right_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -466,8 +496,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Lidar_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -554,8 +590,14 @@
             <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Metal_detector_plate_link.STL</uri>
           </mesh>
         </geometry>
-        <material>
+        <!--<material>
           <shader type='pixel'/>
+        </material>-->
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>__default__</uri>
+          </script>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>

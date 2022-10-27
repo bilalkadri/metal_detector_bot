@@ -2,8 +2,35 @@
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="metal_detector_bot">
+<robot name="metal_detector_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <!--<material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.75 0.75 0.75 1"/>
+  </material>-->
+  <gazebo reference="base_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="Back_left_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Back_right_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Front_left_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Front_right_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Lidar_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="Metal_detector_plate_link">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
   <link
     name="base_link">
     <inertial>
@@ -31,7 +58,7 @@
       <material
         name="">
         <color
-          rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
+          rgba="0 0 0 1" />
       </material>
     </visual>
     <collision>
@@ -121,7 +148,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="3.1416 0 0" />
       <geometry>
         <mesh
           filename="package://metal_detector_bot/meshes/Back_right_wheel_link.STL" />
@@ -147,7 +174,7 @@
     type="continuous">
     <origin
       xyz="0.48383 -0.32952 0.14637"
-      rpy="1.5708 -1.3963 3.1416" />
+      rpy="1.5708 0 0" />
     <parent
       link="base_link" />
     <child
@@ -237,7 +264,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="3.1416 0 0" />
       <geometry>
         <mesh
           filename="package://metal_detector_bot/meshes/Front_right_wheel_link.STL" />
@@ -263,7 +290,7 @@
     type="continuous">
     <origin
       xyz="0.13457 -0.31162 0.11335"
-      rpy="1.5708 -0.87933 3.1416" />
+      rpy="1.5708 0 0" />
     <parent
       link="base_link" />
     <child
@@ -303,7 +330,7 @@
       <material
         name="">
         <color
-          rgba="0.109803921568627 0.109803921568627 0.109803921568627 1" />
+          rgba="1 0 0 1" />
       </material>
     </visual>
     <collision>
@@ -361,7 +388,7 @@
       <material
         name="">
         <color
-          rgba="1 0.937254901960784 0.137254901960784 1" />
+          rgba="1 1 0 1" />
       </material>
     </visual>
     <collision>
@@ -392,6 +419,14 @@
       effort="0"
       velocity="0" />
   </joint>
+
+  <!--<gazebo reference="base_link">
+  <mu1 value="200.0"/>
+  <mu2 value="100"/>
+  <kp value="10000000.0"/>
+  <kd value="1.0"/>
+  <material>Gazebo/black</material>
+  </gazebo>-->
 
  <transmission name="left_wheel_transmission">
   <type>transmission_interface/SimpleTransmission</type>
@@ -427,6 +462,8 @@
       <wheelSeparation>0.2794</wheelSeparation>
       <wheelDiameter>0.1524</wheelDiameter>
       <torque>20</torque>
+      <wheelTorque>5</wheelTorque>
+      <wheelAcceleration>0</wheelAcceleration>
       <commandTopic>/cmd_vel</commandTopic>
       <odometryTopic>/odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
