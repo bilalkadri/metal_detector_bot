@@ -353,7 +353,9 @@
     type="revolute">
     <origin
       xyz="0.28528 -0.51932 0.297"
-      rpy="1.5777 -0.00018804 -1.5436" />
+      rpy="0 0 0" />
+
+     
     <parent
       link="base_link" />
     <child
@@ -366,6 +368,51 @@
       effort="0"
       velocity="0" />
   </joint>
+
+
+   <!--The LIDAR plugin has been inserted by MBK from the website-->
+  <!--https://classic.gazebosim.org/tutorials?tut=ros_gzplugins-->
+  <!--Adding LIDAR Sensor to the Robot-->
+  <!-- hokuyo -->
+  <gazebo reference="Lidar_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/laser/scan</topicName>
+        <frameName>Lidar_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+
+
   <link
     name="Metal_detector_plate_link">
     <inertial>
@@ -433,6 +480,10 @@
   <material>Gazebo/black</material>
   </gazebo>-->
 
+ <!--Added by MBK-->
+ <!-- Necessary for movement of the differential drive mobile robot -->
+ <!-- https://www.theconstructsim.com/ros-qa-126-how-to-configure-the-differential-drive-ros-controller/ -->
+
  <transmission name="left_wheel_transmission">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="Back_left_wheel_joint">
@@ -455,27 +506,35 @@
   </actuator>
 </transmission>
 
-<!--Adding Camera Sensor to the Robot-->
+
+ 
+
+
+  <!--The camera plugin has been inserted by MBK from the website-->
+  <!--https://classic.gazebosim.org/tutorials?tut=ros_gzplugins-->
+  <!--Adding Camera Sensor to the Robot-->
   <joint name="camera_joint" type="fixed">
     <axis xyz="0 1 0" />
-    <origin xyz="0.28528 -0.51932 0.597" rpy="0 0 0"/>
+    <origin xyz="0.28528 -0.61932 0.297" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="camera_link"/>
   </joint>
 
-  <!-- Camera -->
+
+ 
+  <!-- Inserting Camera Link in the URDF File-->
   <link name="camera_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-    <box size="0.05 0.05 0.05"/>
+    <box size="0.01 0.01 0.01"/>
       </geometry>
     </collision>
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-    <box size="0.05 0.05 0.05"/>
+    <box size="0.01 0.01 0.01"/>
       </geometry>
       <material name="red"/>
     </visual>
@@ -487,8 +546,10 @@
     </inertial>
   </link>
 
+  <!-- Camera plugin, so that the camera behaves like a real camera and all the data
+  is available as rostopics -->
 
-<gazebo reference="camera_link">
+  <gazebo reference="camera_link">
     <sensor type="camera" name="camera1">
       <update_rate>30.0</update_rate>
       <camera name="head">
@@ -514,7 +575,7 @@
       <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>0.0</updateRate>
-        <cameraName>rrbot/camera1</cameraName>
+        <cameraName>camera1</cameraName>
         <imageTopicName>image_raw</imageTopicName>
         <cameraInfoTopicName>camera_info</cameraInfoTopicName>
         <frameName>camera_link</frameName>
@@ -528,9 +589,12 @@
     </sensor>
   </gazebo>
 
+  <!--Differential drive plugin inserted by MBK-->
+  <!-- This is necessary to move the robot using cmd_vel -->
+  <!-- The plugin is taken from the website -->
+  <!-- https://kiranpalla.com/autonomous-navigation-ros-differential-drive-robot-simulation/simple-navigation-with-differential-drive-plugin/ -->
 
-<gazebo>
-
+  <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
       <alwaysOn>true</alwaysOn>
       <legacyMode>false</legacyMode>

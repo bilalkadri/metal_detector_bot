@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <include
-    file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="use_sim_time" value ="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="world_name" value="$(find metal_detector_bot)/world/inside_a_room_in_gazebo.world"/>
+  </include>
   <!-- <node
     name="tf_footprint_base"
     pkg="tf"
@@ -16,7 +19,7 @@
 
   <param name="robot_description" command="cat '$(find metal_detector_bot)/urdf/metal_detector_bot.urdf'" />
     
-    <arg name="x" default="-2"/>
+    <arg name="x" default="2"/>
     <arg name="y" default="0"/>
     <arg name="z" default="0.1"/>
     
