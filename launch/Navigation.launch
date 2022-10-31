@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+    <remap from="/scan" to="/scan"/>
+    <param name="base_frame" value="base_footprint"/>
+  </node>
+
+    <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
+        <remap from="/cmd_vel" to="/cmd_vel"/>
+    </node>
+</launch>
