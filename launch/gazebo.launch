@@ -14,10 +14,10 @@
     name="spawn_model"
     pkg="gazebo_ros"
     type="spawn_model"
-    args="-file $(find metal_detector_bot)/urdf/metal_detector_bot.urdf -urdf -model metal_detector_bot"
+    args="-file $(find metal_detector_bot)/urdf/metal_detector_bot.urdf -urdf -model metal_detector_bot_v2"
     output="screen" /> -->
 
-  <param name="robot_description" command="cat '$(find metal_detector_bot)/urdf/metal_detector_bot.urdf'" />
+  <param name="robot_description" command="cat '$(find metal_detector_bot)/urdf/metal_detector_bot_v2.urdf'" />
     
     <arg name="x" default="2"/>
     <arg name="y" default="0"/>

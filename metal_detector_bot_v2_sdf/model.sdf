@@ -1,17 +1,17 @@
 <?xml version='1.0'?>
 <sdf version='1.7'>
-  <model name='metal_detector_bot_sdf'>
+  <model name='metal_detector_bot_v2_sdf'>
     <link name='base_link'>
       <inertial>
-        <pose>0.324698 -0.519407 0.192859 0 -0 0</pose>
-        <mass>3.68397</mass>
+        <pose>0.148209 -0.523868 0.162505 0 -0 0</pose>
+        <mass>5.0255</mass>
         <inertia>
-          <ixx>0.0209131</ixx>
-          <ixy>6.08657e-07</ixy>
-          <ixz>-0.00129762</ixz>
-          <iyy>0.0391259</iyy>
-          <iyz>1.5993e-08</iyz>
-          <izz>0.0539535</izz>
+          <ixx>0.0257143</ixx>
+          <ixy>7.30382e-07</ixy>
+          <ixz>-0.00155638</ixz>
+          <iyy>0.0470482</iyy>
+          <iyz>2.02368e-08</iyz>
+          <izz>0.0653536</izz>
         </inertia>
       </inertial>
       <self_collide>0</self_collide>
@@ -23,17 +23,11 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/base_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/base_link.STL</uri>
           </mesh>
         </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
         <material>
-          <script>
-            <name>Gazebo/Black</name>
-            <uri>__default__</uri>
-          </script>
+          <shader type='pixel'/>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -44,7 +38,95 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/base_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/base_link.STL</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0</patch_radius>
+              <surface_radius>0</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name='Arm_link'>
+      <pose>0.191124 -0.523792 0.128285 1.57015 -0.006896 0.093846</pose>
+      <inertial>
+        <pose>-0.3269 -0.038167 -0.01753 0 -0 0</pose>
+        <mass>0.180271</mass>
+        <inertia>
+          <ixx>0.000140221</ixx>
+          <ixy>2.20204e-08</ixy>
+          <ixz>2.32575e-14</ixz>
+          <iyy>0.00124415</iyy>
+          <iyz>2.59649e-10</iyz>
+          <izz>0.00110585</izz>
+        </inertia>
+      </inertial>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <visual name='Arm_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Arm_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <shader type='pixel'/>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+      <collision name='Arm_link_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Arm_link.STL</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -96,16 +178,16 @@
       </collision>
     </link>
     <link name='Back_left_wheel_link'>
-      <pose>0.48383 -0.66997 0.14637 1.5708 -0 0</pose>
+      <pose>0.481775 -0.674442 0.165298 1.5708 -0 0</pose>
       <inertial>
-        <pose>0 0 0.026259 0 -0 0</pose>
+        <pose>-0.186777 -0.04347 0.026259 0 -0 0</pose>
         <mass>0.498306</mass>
         <inertia>
           <ixx>0.000864069</ixx>
-          <ixy>-1.53512e-21</ixy>
-          <ixz>-3.3895e-20</ixz>
+          <ixy>-9.92358e-20</ixy>
+          <ixz>3.11691e-15</ixz>
           <iyy>0.000864069</iyy>
-          <iyz>-1.03163e-21</iyz>
+          <iyz>1.48206e-20</iyz>
           <izz>0.00167127</izz>
         </inertia>
       </inertial>
@@ -117,17 +199,11 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Back_left_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Back_left_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
         <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>__default__</uri>
-          </script>
+          <shader type='pixel'/>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -138,7 +214,7 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Back_left_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Back_left_wheel_link.STL</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -190,16 +266,16 @@
       </collision>
     </link>
     <link name='Back_right_wheel_link'>
-      <pose>0.48383 -0.32952 0.14637 1.5708 -1.3963 -3.14159</pose>
+      <pose>0.481775 -0.333992 0.165298 1.5708 -1.39626 3.14159</pose>
       <inertial>
-        <pose>-0 0 -0.012891 0 -0 0</pose>
+        <pose>-0.010377 -0.191488 -0.012891 0 -0 0</pose>
         <mass>0.498306</mass>
         <inertia>
           <ixx>0.000864069</ixx>
-          <ixy>2.71051e-20</ixy>
-          <ixz>-9.34239e-20</ixz>
+          <ixy>0</ixy>
+          <ixz>5.41012e-16</ixz>
           <iyy>0.000864069</iyy>
-          <iyz>6.50888e-19</iyz>
+          <iyz>-3.06955e-15</iyz>
           <izz>0.00167127</izz>
         </inertia>
       </inertial>
@@ -211,17 +287,11 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Back_right_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Back_right_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
         <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>__default__</uri>
-          </script>
+          <shader type='pixel'/>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -232,7 +302,183 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Back_right_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Back_right_wheel_link.STL</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0</patch_radius>
+              <surface_radius>0</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name='Ball_caster_left_link'>
+      <pose>0.053437 -0.601142 0.053048 1.5708 -0 0</pose>
+      <inertial>
+        <pose>-0 0 0.0125 0 -0 0</pose>
+        <mass>0.00818123</mass>
+        <inertia>
+          <ixx>5.11327e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>-4.77928e-55</ixz>
+          <iyy>5.11327e-07</iyy>
+          <iyz>-1.06121e-70</iyz>
+          <izz>5.11327e-07</izz>
+        </inertia>
+      </inertial>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <visual name='Ball_caster_left_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Ball_caster_left_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <shader type='pixel'/>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+      <collision name='Ball_caster_left_link_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Ball_caster_left_link.STL</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0</patch_radius>
+              <surface_radius>0</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name='Ball_caster_right_link'>
+      <pose>0.053437 -0.413594 0.053048 2.65923 0.176278 0.344277</pose>
+      <inertial>
+        <pose>-0.006761 0.01641 0.009952 0 -0 0</pose>
+        <mass>0.00818123</mass>
+        <inertia>
+          <ixx>5.11327e-07</ixx>
+          <ixy>-5.29396e-23</ixy>
+          <ixz>-2.64698e-23</ixz>
+          <iyy>5.11327e-07</iyy>
+          <iyz>3.97047e-23</iyz>
+          <izz>5.11327e-07</izz>
+        </inertia>
+      </inertial>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <visual name='Ball_caster_right_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Ball_caster_right_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <shader type='pixel'/>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+      <collision name='Ball_caster_right_link_collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Ball_caster_right_link.STL</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -284,17 +530,17 @@
       </collision>
     </link>
     <link name='Front_left_wheel_link'>
-      <pose>0.13457 -0.68787 0.11335 1.5708 -0 0</pose>
+      <pose>0.132512 -0.674442 0.132278 1.5708 -0 0</pose>
       <inertial>
-        <pose>-0 -0 0.026011 0 -0 0</pose>
-        <mass>0.172261</mass>
+        <pose>-0.186784 -0.042463 0.026002 0 -0 0</pose>
+        <mass>0.168705</mass>
         <inertia>
-          <ixx>0.000112056</ixx>
-          <ixy>1.02659e-21</ixy>
-          <ixz>5.48525e-22</ixz>
-          <iyy>0.000112056</iyy>
-          <iyz>2.96385e-22</iyz>
-          <izz>0.000202988</izz>
+          <ixx>0.000108603</ixx>
+          <ixy>-1.8031e-21</ixy>
+          <ixz>3.39276e-16</ixz>
+          <iyy>0.000108603</iyy>
+          <iyz>6.80935e-21</iyz>
+          <izz>0.000196465</izz>
         </inertia>
       </inertial>
       <self_collide>0</self_collide>
@@ -305,17 +551,11 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Front_left_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Front_left_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
         <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>__default__</uri>
-          </script>
+          <shader type='pixel'/>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -326,7 +566,7 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Front_left_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Front_left_wheel_link.STL</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -378,17 +618,17 @@
       </collision>
     </link>
     <link name='Front_right_wheel_link'>
-      <pose>0.13457 -0.31162 0.11335 1.5708 -0.87933 -3.14159</pose>
+      <pose>0.132512 -0.333992 0.132278 1.5708 1.11013 -3.14159</pose>
       <inertial>
-        <pose>0 -0 -0.013139 0 -0 0</pose>
-        <mass>0.172261</mass>
+        <pose>0.121071 0.148437 -0.013148 0 -0 0</pose>
+        <mass>0.168705</mass>
         <inertia>
-          <ixx>0.000112056</ixx>
+          <ixx>0.000108603</ixx>
           <ixy>1.35525e-20</ixy>
-          <ixz>-2.75192e-20</ixz>
-          <iyy>0.000112056</iyy>
-          <iyz>3.91039e-20</iyz>
-          <izz>0.000202988</izz>
+          <ixz>1.50877e-16</ixz>
+          <iyy>0.000108603</iyy>
+          <iyz>3.03906e-16</iyz>
+          <izz>0.000196465</izz>
         </inertia>
       </inertial>
       <self_collide>0</self_collide>
@@ -399,17 +639,11 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Front_right_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Front_right_wheel_link.STL</uri>
           </mesh>
         </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
         <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>__default__</uri>
-          </script>
+          <shader type='pixel'/>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -420,7 +654,7 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Front_right_wheel_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Front_right_wheel_link.STL</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -472,17 +706,17 @@
       </collision>
     </link>
     <link name='Lidar_link'>
-      <pose>0.28528 -0.51932 0.297 1.5777 -0.000188 -1.5436</pose>
+      <pose>0.283226 -0.523792 0.315928 1.57772 -0.000188 -1.54365</pose>
       <inertial>
-        <pose>-6.8e-05 0.012757 -0.002877 0 -0 0</pose>
-        <mass>0.0553297</mass>
+        <pose>-0.005147 -0.029415 0.184124 0 -0 0</pose>
+        <mass>0.0713754</mass>
         <inertia>
-          <ixx>1.77199e-05</ixx>
-          <ixy>-5.03899e-09</ixy>
-          <ixz>3.9065e-08</ixz>
-          <iyy>3.29682e-05</iyy>
-          <iyz>-2.52552e-07</iyz>
-          <izz>1.80448e-05</izz>
+          <ixx>2.28587e-05</ixx>
+          <ixy>-6.48859e-09</ixy>
+          <ixz>5.03939e-08</ixz>
+          <iyy>4.25289e-05</iyy>
+          <iyz>-3.26178e-07</iyz>
+          <izz>2.32778e-05</izz>
         </inertia>
       </inertial>
       <self_collide>0</self_collide>
@@ -493,17 +727,11 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Lidar_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Lidar_link.STL</uri>
           </mesh>
         </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
         <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>__default__</uri>
-          </script>
+          <shader type='pixel'/>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -514,7 +742,7 @@
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Lidar_link.STL</uri>
+            <uri>/home/drbilal/catkin_ws_make/src/metal_detector_bot_v2/meshes/Lidar_link.STL</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -565,100 +793,38 @@
         </surface>
       </collision>
     </link>
-    <link name='Metal_detector_plate_link'>
-      <pose>0.19318 -0.51932 0.10936 1.5701 -0.006896 0.093846</pose>
-      <inertial>
-        <pose>-0.140649 0.004 -0 0 -0 0</pose>
-        <mass>0.150226</mass>
-        <inertia>
-          <ixx>0.000116851</ixx>
-          <ixy>-1.76231e-19</ixy>
-          <ixz>-2.71559e-18</ixz>
-          <iyy>0.00103679</iyy>
-          <iyz>-9.96731e-21</iyz>
-          <izz>0.000921539</izz>
-        </inertia>
-      </inertial>
-      <self_collide>0</self_collide>
-      <enable_wind>0</enable_wind>
-      <kinematic>0</kinematic>
-      <visual name='Metal_detector_plate_link_visual'>
-        <pose>0 0 0 0 -0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Metal_detector_plate_link.STL</uri>
-          </mesh>
-        </geometry>
-        <!--<material>
-          <shader type='pixel'/>
-        </material>-->
-        <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>__default__</uri>
-          </script>
-        </material>
-        <transparency>0</transparency>
-        <cast_shadows>1</cast_shadows>
-      </visual>
-      <collision name='Metal_detector_plate_link_collision'>
-        <laser_retro>0</laser_retro>
-        <max_contacts>10</max_contacts>
-        <pose>0 0 0 0 -0 0</pose>
-        <geometry>
-          <mesh>
-            <uri>/home/drbilal/catkin_ws/src/metal_detector_bot_urdf/meshes/Metal_detector_plate_link.STL</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <surface>
-          <friction>
-            <ode>
-              <mu>1</mu>
-              <mu2>1</mu2>
-              <fdir1>0 0 0</fdir1>
-              <slip1>0</slip1>
-              <slip2>0</slip2>
-            </ode>
-            <torsional>
-              <coefficient>1</coefficient>
-              <patch_radius>0</patch_radius>
-              <surface_radius>0</surface_radius>
-              <use_patch_radius>1</use_patch_radius>
-              <ode>
-                <slip>0</slip>
-              </ode>
-            </torsional>
-          </friction>
-          <bounce>
-            <restitution_coefficient>0</restitution_coefficient>
-            <threshold>1e+06</threshold>
-          </bounce>
-          <contact>
-            <collide_without_contact>0</collide_without_contact>
-            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-            <collide_bitmask>1</collide_bitmask>
-            <ode>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+13</kp>
-              <kd>1</kd>
-              <max_vel>0.01</max_vel>
-              <min_depth>0</min_depth>
-            </ode>
-            <bullet>
-              <split_impulse>1</split_impulse>
-              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+13</kp>
-              <kd>1</kd>
-            </bullet>
-          </contact>
-        </surface>
-      </collision>
-    </link>
+    <joint name='Arm_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>Arm_link</child>
+      <pose>-0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
     <joint name='Back_left_wheel_joint' type='revolute'>
       <parent>base_link</parent>
       <child>Back_left_wheel_link</child>
@@ -694,7 +860,7 @@
     <joint name='Back_right_wheel_joint' type='revolute'>
       <parent>base_link</parent>
       <child>Back_right_wheel_link</child>
-      <pose>0 0 0 0 -0 0</pose>
+      <pose>-0 0 -0 0 -0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -723,10 +889,74 @@
         </ode>
       </physics>
     </joint>
+    <joint name='Ball_caster_left_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>Ball_caster_left_link</child>
+      <pose>0 -0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <joint name='Ball_caster_right_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>Ball_caster_right_link</child>
+      <pose>-0 0 0 0 -0 0</pose>
+      <axis>
+        <xyz>0.332286 -0.806458 -0.489093</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
     <joint name='Front_left_wheel_joint' type='revolute'>
       <parent>base_link</parent>
       <child>Front_left_wheel_link</child>
-      <pose>0 0 0 0 -0 0</pose>
+      <pose>0 0 -0 0 -0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -758,7 +988,7 @@
     <joint name='Front_right_wheel_joint' type='revolute'>
       <parent>base_link</parent>
       <child>Front_right_wheel_link</child>
-      <pose>-0 -0 0 0 -0 0</pose>
+      <pose>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -791,38 +1021,6 @@
       <parent>base_link</parent>
       <child>Lidar_link</child>
       <pose>0 0 -0 0 -0 0</pose>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-          <damping>0</damping>
-          <friction>0</friction>
-        </dynamics>
-      </axis>
-      <physics>
-        <ode>
-          <limit>
-            <cfm>0</cfm>
-            <erp>0.2</erp>
-          </limit>
-          <suspension>
-            <cfm>0</cfm>
-            <erp>0.2</erp>
-          </suspension>
-        </ode>
-      </physics>
-    </joint>
-    <joint name='Metal_detector_plate_joint' type='revolute'>
-      <parent>base_link</parent>
-      <child>Metal_detector_plate_link</child>
-      <pose>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>

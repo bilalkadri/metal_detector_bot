@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="metal_detector_bot_v2">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.14820876346872 -0.523867741726996 0.162505173949445"
+        rpy="0 0 0" />
+      <mass
+        value="5.02550363965795" />
+      <inertia
+        ixx="0.0257142504722984"
+        ixy="7.30381654145457E-07"
+        ixz="-0.00155638207607083"
+        iyy="0.0470482043538104"
+        iyz="2.02367728203633E-08"
+        izz="0.0653535542838523" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <!-- <link
+    name="Front_left_wheel_link">
+    <inertial>
+      <origin
+        xyz="-0.186784280180533 -0.0424634473430261 0.0260017108338958"
+        rpy="0 0 0" />
+      <mass
+        value="0.168704974459748" />
+      <inertia
+        ixx="0.000108602567075928"
+        ixy="-1.80309621562071E-21"
+        ixz="3.3927646580475E-16"
+        iyy="0.000108602567075928"
+        iyz="6.80934569610642E-21"
+        izz="0.000196465488509943" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Front_left_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Front_left_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Front_left_wheel_joint"
+    type="revolute">
+    <origin
+      xyz="0.132512236226718 -0.67444223616167 0.132278349849509"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Front_left_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Front_right_wheel_link">
+    <inertial>
+      <origin
+        xyz="0.121070508262891 0.148436665660101 -0.0131482891668775"
+        rpy="0 0 0" />
+      <mass
+        value="0.168704974459748" />
+      <inertia
+        ixx="0.000108602567075928"
+        ixy="1.35525271560688E-20"
+        ixz="1.50876996779188E-16"
+        iyy="0.000108602567075928"
+        iyz="3.03905871485453E-16"
+        izz="0.000196465488509943" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Front_right_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Front_right_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Front_right_wheel_joint"
+    type="revolute">
+    <origin
+      xyz="0.132512236226719 -0.33399223616167 0.132278349849508"
+      rpy="1.5707963267949 1.11013290591078 -3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="Front_right_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint> -->
+  <link
+    name="Back_left_wheel_link">
+    <inertial>
+      <origin
+        xyz="-0.186776712090794 -0.0434704211512933 0.0262587770521271"
+        rpy="0 0 0" />
+      <mass
+        value="0.49830589190105" />
+      <inertia
+        ixx="0.000864068748819035"
+        ixy="-9.9235824112217E-20"
+        ixz="3.11690677933257E-15"
+        iyy="0.000864068748819036"
+        iyz="1.48206438688386E-20"
+        izz="0.00167126892614855" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Back_left_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Back_left_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Back_left_wheel_joint"
+    type="revolute">
+    <origin
+      xyz="0.481774530577528 -0.67444223616167 0.165298349849509"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Back_left_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Back_right_wheel_link">
+    <inertial>
+      <origin
+        xyz="-0.0103765720910736 -0.191487713565824 -0.0128912229459487"
+        rpy="0 0 0" />
+      <mass
+        value="0.49830589190105" />
+      <inertia
+        ixx="0.000864068748819036"
+        ixy="0"
+        ixz="5.41012177865636E-16"
+        iyy="0.000864068748819036"
+        iyz="-3.06955123566808E-15"
+        izz="0.00167126892614855" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Back_right_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Back_right_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Back_right_wheel_joint"
+    type="revolute">
+    <origin
+      xyz="0.481774530577528 -0.33399223616167 0.165298349849508"
+      rpy="1.5707963267949 -1.39626340159546 3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="Back_right_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Lidar_link">
+    <inertial>
+      <origin
+        xyz="-0.00514653899335937 -0.0294145329036227 0.184123621426892"
+        rpy="0 0 0" />
+      <mass
+        value="0.0713753510032307" />
+      <inertia
+        ixx="2.28586671364648E-05"
+        ixy="-6.48859496149917E-09"
+        ixz="5.03938626416853E-08"
+        iyy="4.25289391276525E-05"
+        iyz="-3.26178132108711E-07"
+        izz="2.32778215531101E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.109803921568627 0.109803921568627 0.109803921568627 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Lidar_joint"
+    type="revolute">
+    <origin
+      xyz="0.283226064877054 -0.523791886206672 0.315927719919427"
+      rpy="1.57772045120702 -0.000188044043284599 -1.54364562613363" />
+    <parent
+      link="base_link" />
+    <child
+      link="Lidar_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Arm_link">
+    <inertial>
+      <origin
+        xyz="-0.326900302921489 -0.0381673965508597 -0.017529976977349"
+        rpy="0 0 0" />
+      <mass
+        value="0.180271479688744" />
+      <inertia
+        ixx="0.000140221478864576"
+        ixy="2.20203769608975E-08"
+        ixz="2.32574664415413E-14"
+        iyy="0.0012441456484585"
+        iyz="2.59648852192274E-10"
+        izz="0.00110584706625675" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Arm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.937254901960784 0.137254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Arm_joint"
+    type="revolute">
+    <origin
+      xyz="0.191123938184075 -0.52379223616167 0.128284618968243"
+      rpy="1.5701472443575 -0.00689619877468166 0.0938460523092666" />
+    <parent
+      link="base_link" />
+    <child
+      link="Arm_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Ball_caster_left_link">
+    <inertial>
+      <origin
+        xyz="-4.14598910758457E-14 2.39183672867682E-14 0.0125000000000005"
+        rpy="0 0 0" />
+      <mass
+        value="0.00818123086872342" />
+      <inertia
+        ixx="5.11326929295214E-07"
+        ixy="0"
+        ixz="-4.77927573339736E-55"
+        iyy="5.11326929295214E-07"
+        iyz="-1.06121239205001E-70"
+        izz="5.11326929295214E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Ball_caster_left_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Ball_caster_left_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Ball_caster_left_joint"
+    type="continuous">
+    <origin
+      xyz="0.0534371795019374 -0.601142236161636 0.0530479286981914"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Ball_caster_left_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Ball_caster_right_link">
+    <inertial>
+      <origin
+        xyz="-0.00676133677348488 0.0164097670395621 0.00995204921711546"
+        rpy="0 0 0" />
+      <mass
+        value="0.00818123086872342" />
+      <inertia
+        ixx="5.11326929295214E-07"
+        ixy="-5.29395592033938E-23"
+        ixz="-2.64697796016969E-23"
+        iyy="5.11326929295215E-07"
+        iyz="3.97046694025453E-23"
+        izz="5.11326929295214E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Ball_caster_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://metal_detector_bot/meshes/Ball_caster_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Ball_caster_right_joint"
+    type="continuous">
+    <origin
+      xyz="0.0534371795012047 -0.413594277716699 0.0530479286982032"
+      rpy="2.65922459739076 0.176277787413547 0.344276962857752" />
+    <parent
+      link="base_link" />
+    <child
+      link="Ball_caster_right_link" />
+    <axis
+      xyz="0.332285756911576 -0.806457664239828 -0.489093254443916" />
+  </joint>
+</robot>
