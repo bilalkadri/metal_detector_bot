@@ -2,8 +2,37 @@
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="metal_detector_bot_v2">
+<robot name="metal_detector_bot_v2">
+
+<gazebo reference="base_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="Back_left_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Back_right_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <!-- <gazebo reference="Front_left_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="Front_right_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo> -->
+  <gazebo reference="Lidar_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="camera_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+
+  <!-- <gazebo reference="Metal_detector_plate_link"> -->
+  <gazebo reference="Arm_link">
+  
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  
   <link
     name="base_link">
     <inertial>
