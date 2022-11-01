@@ -306,64 +306,6 @@
       velocity="0" />
   </joint>
   <link
-    name="Lidar_link">
-    <inertial>
-      <origin
-        xyz="-0.00514653899335937 -0.0294145329036227 0.184123621426892"
-        rpy="0 0 0" />
-      <mass
-        value="0.0713753510032307" />
-      <inertia
-        ixx="2.28586671364648E-05"
-        ixy="-6.48859496149917E-09"
-        ixz="5.03938626416853E-08"
-        iyy="4.25289391276525E-05"
-        iyz="-3.26178132108711E-07"
-        izz="2.32778215531101E-05" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.109803921568627 0.109803921568627 0.109803921568627 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="Lidar_joint"
-    type="revolute">
-    <origin
-      xyz="0.283226064877054 -0.523791886206672 0.315927719919427"
-      rpy="1.57772045120702 -0.000188044043284599 -1.54364562613363" />
-    <parent
-      link="base_link" />
-    <child
-      link="Lidar_link" />
-    <axis
-      xyz="0 1 0" />
-    <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
-  </joint>
-  <link
     name="Arm_link">
     <inertial>
       <origin
@@ -528,67 +470,7 @@
       xyz="0.332285756911576 -0.806457664239828 -0.489093254443916" />
   </joint>
 
-<link
-    name="Lidar_link">
-    <inertial>
-      <origin
-        xyz="-6.79587614786925E-05 0.0127572143525103 -0.00287746273821438"
-        rpy="0 0 0" />
-      <mass
-        value="0.0553297294575326" />
-      <inertia
-        ixx="1.77198970100708E-05"
-        ixy="-5.03899483380146E-09"
-        ixz="3.90650477574448E-08"
-        iyy="3.29681799815038E-05"
-        iyz="-2.52552357078286E-07"
-        izz="1.80448127856945E-05" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="1 0 0 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="Lidar_joint"
-    type="revolute">
-    <origin
-      xyz="0.28528 -0.51932 0.297"
-      rpy="0 0 0" />
 
-     
-    <parent
-      link="base_link" />
-    <child
-      link="Lidar_link" />
-    <axis
-      xyz="0 1 0" />
-    <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
-  </joint>
-  
 
 <!--The LIDAR plugin has been inserted by MBK from the website-->
   <!--https://classic.gazebosim.org/tutorials?tut=ros_gzplugins-->
