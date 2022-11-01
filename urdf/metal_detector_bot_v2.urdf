@@ -231,7 +231,7 @@
   </link>
   <joint
     name="Back_left_wheel_joint"
-    type="revolute">
+    type="continuous">
     <origin
       xyz="0.481774530577528 -0.67444223616167 0.165298349849509"
       rpy="1.5707963267949 0 0" />
@@ -289,7 +289,7 @@
   </link>
   <joint
     name="Back_right_wheel_joint"
-    type="revolute">
+    type="continuous">
     <origin
       xyz="0.481774530577528 -0.33399223616167 0.165298349849508"
       rpy="1.5707963267949 -1.39626340159546 3.14159265358979" />
