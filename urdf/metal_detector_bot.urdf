@@ -327,7 +327,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="1.5707 0 -1.5707" />
       <geometry>
         <mesh
           filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
@@ -376,7 +376,7 @@
   <!-- hokuyo -->
   <gazebo reference="Lidar_link">
     <sensor type="ray" name="head_hokuyo_sensor">
-      <pose>0 0 0 0 0 0</pose>
+      <pose>0 0 0 0 0 3.142</pose>
       <visualize>true</visualize>
       <update_rate>40</update_rate>
       <ray>
