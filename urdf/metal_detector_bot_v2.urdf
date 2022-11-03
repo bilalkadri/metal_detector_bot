@@ -281,26 +281,26 @@
     <axis
       xyz="0 0 1" />
   </joint>
-  <link
+   <link
     name="Lidar_link">
     <inertial>
       <origin
-        xyz="-6.83083469150635E-05 0.0127582410487194 -0.00287747207919191"
+        xyz="-6.79587614786925E-05 0.0127572143525103 -0.00287746273821438"
         rpy="0 0 0" />
       <mass
-        value="0.0713753518670423" />
+        value="0.0553297294575326" />
       <inertia
-        ixx="2.28586672028742E-05"
-        ixy="-6.50031191202651E-09"
-        ixz="5.03932572909095E-08"
-        iyy="4.25289527912177E-05"
-        iyz="-3.25792493873772E-07"
-        izz="2.32778090817256E-05" />
+        ixx="1.77198970100708E-05"
+        ixy="-5.03899483380146E-09"
+        ixz="3.90650477574448E-08"
+        iyy="3.29681799815038E-05"
+        iyz="-2.52552357078286E-07"
+        izz="1.80448127856945E-05" />
     </inertial>
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="1.5707 0 -1.5707" />
       <geometry>
         <mesh
           filename="package://metal_detector_bot/meshes/Lidar_link.STL" />
@@ -308,7 +308,7 @@
       <material
         name="">
         <color
-          rgba="0.109803921568627 0.109803921568627 0.109803921568627 1" />
+          rgba="1 0 0 1" />
       </material>
     </visual>
     <collision>
@@ -323,19 +323,24 @@
   </link>
   <joint
     name="Lidar_joint"
-    type="continuous">
+    type="revolute">
     <origin
-      xyz="-0.0209 0 0.171"
-      rpy="1.5708 0 -1.5436" />
+      xyz="0.28528 -0.51932 0.297"
+      rpy="0 0 0" />
+
+     
     <parent
       link="base_link" />
     <child
       link="Lidar_link" />
     <axis
       xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
   </joint>
-
-
 
 
    <!--The LIDAR plugin has been inserted by MBK from the website-->
