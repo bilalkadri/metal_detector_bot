@@ -7,7 +7,7 @@
   <!-- We don't have any map frame in our robot urdf-->
 
   <node name="Metal_Robot_slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
-    <!-- <remap from="/scan" to="/scan"/> -->
+    <remap from="/laser/scan" to="/scan"/>
    
     <param name="base_frame" value="$(arg set_base_frame)"/>
     <param name="odom_frame" value="$(arg set_odom_frame)"/>
