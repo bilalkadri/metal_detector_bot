@@ -1,4 +1,15 @@
+#metal_detector_bot:
+# Publish all joint states
+# joint_state_controller:
+#     type : "joint_state_controller/JointStateController"
+#     publish_rate : 50
+
+
 mobile_base_controller:
+  type : "joint_state_controller/JointStateController"
+  publish_rate : 50
+  
+  
   type        : "diff_drive_controller/DiffDriveController"
   left_wheel : 'Back_left_wheel_joint'
   right_wheel: 'Back_right_wheel_joint'
@@ -44,6 +55,7 @@ mobile_base_controller:
       max_acceleration       : 1.5  # rad/s^2
       has_jerk_limits        : true
       max_jerk               : 2.5  # rad/s^3
+
 
 
 #controller_joint_names: ['', 'Back_left_wheel_joint', 'Back_right_wheel_joint', 'Front_left_wheel_joint', 'Front_right_wheel_joint', 'Lidar_joint', 'Metal_detector_plate_joint', ]

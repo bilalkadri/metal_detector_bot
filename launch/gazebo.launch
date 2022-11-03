@@ -39,7 +39,10 @@
 
    <node name="metal_bot_controller_manager" pkg="controller_manager" type="spawner"
           respawn="false" output="screen" args="mobile_base_controller" />
-
+    <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
  
 
 </launch>

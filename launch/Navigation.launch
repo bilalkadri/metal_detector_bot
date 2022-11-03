@@ -3,16 +3,19 @@
   <arg name="open_rviz" default="true"/>
   <arg name="set_base_frame" default="base_link"/>
   <arg name="set_odom_frame" default="odom"/>
-  <!-- <arg name="set_map_frame"  default="odom"/>  -->
+  <arg name="set_map_frame"  default="map"/> 
+  <remap from="/laser/scan" to="/scan"/>
+  <arg name="scan_topic" default="/scan"/>
   <!-- We don't have any map frame in our robot urdf-->
 
   <node name="Metal_Robot_slam_gmapping" pkg="gmapping" type="slam_gmapping" output="screen">
-    <remap from="/laser/scan" to="/scan"/>
+    
    
     <param name="base_frame" value="$(arg set_base_frame)"/>
     <param name="odom_frame" value="$(arg set_odom_frame)"/>
-    <!-- <param name="map_frame"  value="$(arg set_map_frame)"/> -->
-    <!-- <rosparam command="load" file="$(find turtlebot3_slam)/config/gmapping_params.yaml" /> -->
+    <param name="map_frame"  value="$(arg set_map_frame)"/>
+    <!-- <param name="scan_topic"  value="$(arg set_scan_topic)"/> -->
+    <rosparam command="load" file="$(find metal_detector_bot)/config/gmapping_params.yaml" />
   </node>
 
 
