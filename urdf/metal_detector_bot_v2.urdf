@@ -375,7 +375,7 @@
     </collision>
   </link>
   <joint
-    name="Metal_detector_arm_joint"
+    name="Metal_detector_plate_joint"
     type="continuous">
     <origin
       xyz="-0.1143 0 -0.008"
@@ -410,9 +410,17 @@
       <robotBaseFrame>base_link</robotBaseFrame>
       <publishWheelTF>true</publishWheelTF>
       <publishOdomTF>true</publishOdomTF>
+      <publishWheelJointState>true</publishWheelJointState>
+ 
     </plugin>
 
   <plugin name="gazebo_ros_control" filename="libgazebo_ros_contol.so">
+        <!-- <robotNamespace>/</robotNamespace> -->
+  </plugin>
+
+  <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName> Ball_caster_left_joint , Ball_caster_right_joint, Lidar_joint, Metal_detector_plate_joint
+      </jointName>
   </plugin>
 </gazebo>
 </robot>
