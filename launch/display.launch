@@ -4,6 +4,12 @@
   <param
     name="robot_description"
     textfile="$(find metal_detector_bot)/urdf/metal_detector_bot_v2.urdf" />
+
+  <!-- <param name="robot_description" textfile="$(find car-robot)/urdf/bot.urdf"/> -->
+  <arg name="rvizconfig" default="$(find metal_detector_bot)/rviz/metal_detector_bot.rviz" />
+  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/> -->
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/> -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
   <!-- <node
     name="joint_state_publisher_gui"
     pkg="joint_state_publisher_gui"
@@ -12,9 +18,9 @@
     name="robot_state_publisher"
     pkg="robot_state_publisher"
     type="robot_state_publisher" /> -->
-  <node
+  <!-- <node
     name="rviz"
     pkg="rviz"
     type="rviz"
-    args="-d $(find metal_detector_bot)/urdf.rviz" />
+    args="-d $(find metal_detector_bot)/urdf.rviz" /> -->
 </launch>
