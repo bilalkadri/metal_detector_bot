@@ -281,6 +281,8 @@
     <axis
       xyz="0 0 1" />
   </joint>
+
+
    <link
     name="Lidar_link">
     <inertial>
@@ -321,9 +323,10 @@
       </geometry>
     </collision>
   </link>
+
   <joint
     name="Lidar_joint"
-    type="revolute">
+    type="fixed">
     <origin
       xyz="-0.02 0 0.17"
       rpy="0 0 0" />
@@ -338,11 +341,11 @@
       link="Lidar_link" />
     <axis
       xyz="0 1 0" />
-    <limit
+    <!-- <limit
       lower="0"
       upper="0"
       effort="0"
-      velocity="0" />
+      velocity="0" /> -->
   </joint>
 
 
@@ -376,7 +379,7 @@
                stddev of 0.01m will put 99.7% of samples within 0.03m of the true
                reading. -->
           <mean>0.0</mean>
-          <stddev>0.01</stddev>
+          <stddev>0.001</stddev>
         </noise>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
@@ -473,8 +476,12 @@
   </plugin>
 
   <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-      <jointName> Ball_caster_left_joint , Ball_caster_right_joint, Lidar_joint, Metal_detector_plate_joint
+      <!-- <jointName> Ball_caster_left_joint , Ball_caster_right_joint, Lidar_joint, Metal_detector_plate_joint
+      </jointName> -->
+     <jointName> Ball_caster_left_joint , Ball_caster_right_joint, Metal_detector_plate_joint
       </jointName>
+
+
   </plugin>
 </gazebo>
 </robot>
