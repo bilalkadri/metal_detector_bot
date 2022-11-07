@@ -31,11 +31,10 @@
   <gazebo reference="camera_link">
     <material>Gazebo/Blue</material>
   </gazebo>
-
-
   <gazebo reference="Metal_detector_plate_link">
     <material>Gazebo/Yellow</material>
   </gazebo>
+  
   <link
     name="base_link">
     <inertial>
@@ -313,7 +312,7 @@
     <inertial>
       <origin
         xyz="-6.79587614786925E-05 0.0127572143525103 -0.00287746273821438"
-        rpy="0 0 0" />
+        rpy="1.5707 0 0" />
       <mass
         value="0.0553297294575326" />
       <inertia
@@ -471,6 +470,7 @@
       effort="0"
       velocity="0" />
   </joint>
+  
 
   <!--<gazebo reference="base_link">
   <mu1 value="200.0"/>
