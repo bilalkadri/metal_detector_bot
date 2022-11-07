@@ -329,7 +329,7 @@
     type="fixed">
     <origin
       xyz="-0.02 0 0.17"
-      rpy="0 0 0" />
+      rpy="0 0 3.1415" />
       <!--<origin
       xyz="0.28528 -0.51932 0.297"
       rpy="0 0 0" />-->
@@ -355,7 +355,7 @@
   <!-- hokuyo -->
   <gazebo reference="Lidar_link">
     <sensor type="ray" name="head_hokuyo_sensor">
-      <pose>0 0 0 0 0 3.142</pose>
+      <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
       <update_rate>40</update_rate>
       <ray>
