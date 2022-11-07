@@ -7,14 +7,14 @@ astep: 0.05
 iterations: 5
 lsigma: 0.075
 ogain: 3.0
-lskip: 0
+lskip: 10
 minimumScore: 50
 srr: 0.1
 srt: 0.2
 str: 0.1
 stt: 0.2
-linearUpdate: 1.0
-angularUpdate: 0.2
+linearUpdate: 0.1
+angularUpdate: 0.1
 temporalUpdate: 0.5
 resampleThreshold: 0.5
 particles: 100
