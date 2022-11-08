@@ -28,7 +28,7 @@ ros::NodeHandle  nh;
 //char* robot_id = "metal_detector_bot";
 char* robot_id = "";
 sensor_msgs::JointState robot_state;
-char *a[] = {"Left_wheel_joint", "Right_wheel_joint","Ball_caster_front_joint","Ball_caster_back_joint"};  //R: Right - L: Left
+char *a[] = {"Left_wheel_link", "Right_wheel_link","Ball_caster_front_link","Ball_caster_back_link"};  //R: Right - L: Left
 float pos[4]; /// stores arduino time
 float vel[4];
 float eff[4];

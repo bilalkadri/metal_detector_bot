@@ -17,4 +17,7 @@
     pkg="rviz"
     type="rviz"
     args="-d $(find metal_detector_bot)/urdf.rviz" />
+
+    <node pkg="metal_detector_bot" type="fixed_tf_broadcaster.py"
+          name="broadcaster_fixed" />
 </launch>
