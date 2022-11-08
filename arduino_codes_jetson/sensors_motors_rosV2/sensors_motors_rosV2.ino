@@ -25,13 +25,13 @@ ros::NodeHandle  nh;
 #define METALPIN 35
 #include <Encoder.h>
 
-char* robot_id = "/imr";
-
+//char* robot_id = "metal_detector_bot";
+char* robot_id = "";
 sensor_msgs::JointState robot_state;
-char *a[] = {"Right_wheel", "Left_wheel"};  //R: Right - L: Left
-float pos[2]; /// stores arduino time
-float vel[2];
-float eff[2];
+char *a[] = {"Left_wheel_joint", "Right_wheel_joint","Ball_caster_front_joint","Ball_caster_back_joint"};  //R: Right - L: Left
+float pos[4]; /// stores arduino time
+float vel[4];
+float eff[4];
 
 ros::Publisher joint_states("joint_states", &robot_state);
 /*
