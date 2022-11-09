@@ -28,7 +28,7 @@ ros::NodeHandle  nh;
 //char* robot_id = "metal_detector_bot";
 char* robot_id = "";
 sensor_msgs::JointState robot_state;
-char *a[] = {"Left_wheel_link", "Right_wheel_link","Ball_caster_front_link","Ball_caster_back_link"};  //R: Right - L: Left
+char *a[] = {"Left_wheel_joint", "Right_wheel_joint","Ball_caster_front_joint","Ball_caster_back_joint"};  //R: Right - L: Left
 float pos[4]; /// stores arduino time
 float vel[4];
 float eff[4];
@@ -282,6 +282,14 @@ pinMode(METALPIN,INPUT);
     nh.subscribe(sub_rpwm);
   nh.subscribe(sub_lpwm);
   nh.advertise(joint_states);
+
+    robot_state.header.frame_id = robot_id;
+  robot_state.name_length = 4;
+  robot_state.velocity_length = 4;
+  robot_state.position_length = 4; /// here used for arduino time
+  robot_state.effort_length = 4; /// here used for arduino time
+
+    robot_state.name = a;
   
   pinMode (STATUS_LED,OUTPUT);  // Status LED
 
@@ -328,8 +336,8 @@ pinMode(METALPIN,INPUT);
 //  counter=0;
 }
 
-long RMR = 0;
-long LMR = 0;
+double RMR = 0;
+double LMR = 0;
 long oldPositionMR  = -999;
 long oldPositionML  = -999;
 long oldcountL = 0;
@@ -338,16 +346,15 @@ long oldcountR = 0;
 void loop() { 
 nh.spinOnce();
 
-  robot_state.header.frame_id = robot_id;
-  robot_state.name_length = 4;
-  robot_state.velocity_length = 4;
-  robot_state.position_length = 4; /// here used for arduino time
-  robot_state.effort_length = 4; /// here used for arduino time
 
-    robot_state.name = a;
     robot_state.position = pos;
     robot_state.velocity = vel;
     robot_state.effort = eff;
+    
+   RMR = (double(newPositionMR)/1770.0)*(2.0*3.146);
+   LMR = (double(newPositionML)/1770.0)*(2.0*3.146);
+    pos[0] = RMR;
+    pos[1] =LMR;
     joint_states.publish( &robot_state );
     
   RENC.data = newPositionMR;
@@ -412,7 +419,7 @@ nh.spinOnce();
   digitalWrite(M2IN1,HIGH);
   digitalWrite(M2IN2,LOW);
   analogWrite(M2PWM,0);
-  ENCNT(); 
+
   }
 //  delay(100);/
 //  if((millis()-timer)>=20)  // Main loop runs at 50Hz
@@ -452,6 +459,7 @@ nh.spinOnce();
 //
 ////    printdata();/
 //  }
+  ENCNT(); 
 }
 void ENCNT()
 {
@@ -467,28 +475,27 @@ void ENCNT()
 //    Serial.print(newPositionMR);Serial.print("\t");
 //    Serial.println(newPositionML);
   
-  if ((newPositionMR-oldcountR)>=1770)
-  {  
-    RMR++;
-    oldcountR = newPositionMR;
-  }
-  else if((newPositionMR-oldcountR)<=-1770)
-    {
-      RMR--;
-    oldcountR = newPositionMR;
-    }
- 
-  if ((newPositionML-oldcountL)>=1770)
-  { LMR++;
-  oldcountL = newPositionML;
-  }
-  else if((newPositionML-oldcountL)<=-1770)
-    {
-      LMR--;
-     oldcountL = newPositionML;
-    }
-    pos[0] = RMR;
-    pos[1] =LMR;
-    Serial.print(RMR);Serial.print("\t");
-    Serial.println(LMR);
+//  if ((newPositionMR-oldcountR)>=1770)
+//  {  
+//    RMR++;
+//    oldcountR = newPositionMR;
+//  }
+//  else if((newPositionMR-oldcountR)<=-1770)
+//    {
+//      RMR--;
+//    oldcountR = newPositionMR;
+//    }
+// 
+//  if ((newPositionML-oldcountL)>=1770)
+//  { LMR++;
+//  oldcountL = newPositionML;
+//  }
+//  else if((newPositionML-oldcountL)<=-1770)
+//    {
+//      LMR--;
+//     oldcountL = newPositionML;
+//    }
+
+//    Serial.print(RMR);Serial.print("\t");
+//    Serial.println(LMR);
 }
