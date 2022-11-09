@@ -8,13 +8,28 @@
  
 
 #include <ros.h>
+#include <ros/time.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Empty.h>
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/ChannelFloat32.h>
 #include <sensor_msgs/JointState.h>
+#include <Quaternion.h>
+#include <tf/transform_broadcaster.h>
+
 ros::NodeHandle  nh;
+
+geometry_msgs::TransformStamped t1,t2,t3,t4,t5;
+tf::TransformBroadcaster broadcaster;
+
+char base_link[] = "/base_link";
+char odom[] = "/odom";
+char Left_wheel_link[] = "/Left_wheel_link";
+char Right_wheel_link[] = "/Right_wheel_link";
+char Ball_caster_front_link[] = "/Ball_caster_front_link";
+char Ball_caster_back_link[] = "/Ball_caster_back_link";
+
 
 #define M1IN1 27
 #define M1IN2 29
@@ -262,6 +277,12 @@ Encoder  M2ENC(2,3);
 long newPositionMR = 0;
 long newPositionML = 0;
 char IMU_DATA[30] = "";
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////Setup Function ////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
 void setup() {
 pinMode(M1IN1,OUTPUT);
 pinMode(M1IN2,OUTPUT);
@@ -282,12 +303,12 @@ pinMode(METALPIN,INPUT);
     nh.subscribe(sub_rpwm);
   nh.subscribe(sub_lpwm);
   nh.advertise(joint_states);
-
+    broadcaster.init(nh);
     robot_state.header.frame_id = robot_id;
   robot_state.name_length = 4;
-  robot_state.velocity_length = 4;
+  robot_state.velocity_length = 0;
   robot_state.position_length = 4; /// here used for arduino time
-  robot_state.effort_length = 4; /// here used for arduino time
+  robot_state.effort_length = 0; /// here used for arduino time
 
     robot_state.name = a;
   
@@ -343,18 +364,67 @@ long oldPositionML  = -999;
 long oldcountL = 0;
 long oldcountR = 0;
 
+
+void  broadcasting_the_tf_trasform()
+  {
+  /*Broadcasting the transform between odom and base_link*/
+   
+  t1.header.frame_id = odom;
+  t1.child_frame_id = base_link;
+  t1.transform.translation.x = 1.0; 
+  t1.transform.rotation.x = 0.0;
+  t1.transform.rotation.y = 0.0; 
+  t1.transform.rotation.z = 0.0; 
+  t1.transform.rotation.w = 1.0;  
+  t1.header.stamp = nh.now();
+ 
+  broadcaster.sendTransform(t1);
+
+  /*Broadcasting the transform between base_link and Left_wheel_link*/
+  
+  Quaternion Q1,Q2;
+  double a[4];
+  Q2=Q1.from_euler_rotation(-1.5707963267949, -1.17899991460539, -1.5707963267949);
+  
+  t2.header.frame_id = base_link;
+  t2.child_frame_id = Left_wheel_link;
+  t2.transform.translation.x = -0.0765;
+  t2.transform.translation.y = 0.00190302448688115;
+  t2.transform.translation.z = 0.00943214142854351;
+  t2.transform.rotation.x = Q2.a;
+  t2.transform.rotation.y = Q2.b; 
+  t2.transform.rotation.z = Q2.c; 
+  t2.transform.rotation.w = Q2.d;  
+  t2.header.stamp = nh.now();
+  
+  broadcaster.sendTransform(t2);
+    /*Broadcasting the transform between base_link and Right_wheel_link*/
+    /*Broadcasting the transform between base_link and Ball_caster_back_link*/
+    /*Broadcasting the transform between base_link and Ball_caster_forward_link*/
+   //Have to write the code here
+  }
+
+
 void loop() { 
 nh.spinOnce();
 
+  broadcasting_the_tf_trasform(); //Custom made function to publish all the transforms
 
-    robot_state.position = pos;
-    robot_state.velocity = vel;
-    robot_state.effort = eff;
+
+
+
+  
+
+    
+        
+//    robot_state.velocity = vel;
+//    robot_state.effort = eff;
     
    RMR = (double(newPositionMR)/1770.0)*(2.0*3.146);
    LMR = (double(newPositionML)/1770.0)*(2.0*3.146);
     pos[0] = RMR;
     pos[1] =LMR;
+    robot_state.position = pos;
     joint_states.publish( &robot_state );
     
   RENC.data = newPositionMR;
