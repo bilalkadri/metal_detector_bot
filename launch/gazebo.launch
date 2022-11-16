@@ -19,7 +19,7 @@
 
   <param name="robot_description" command="cat '$(find metal_detector_bot)/urdf/metal_detector_bot_v2.urdf'" />
     
-     <arg name="x" default="-3"/>
+    <arg name="x" default="-3"/>
     <arg name="y" default="3"/>
     <arg name="z" default="0.1"/>
     
