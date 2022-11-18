@@ -22,15 +22,18 @@
 
 ros::NodeHandle  nh;
 
-geometry_msgs::TransformStamped t1,t2,t3,t4,t5;
+geometry_msgs::TransformStamped t1,t2,t3,t4,t5,t6,t7;
 tf::TransformBroadcaster broadcaster;
 
 char base_link[] = "/base_link";
 char odom[] = "/odom";
-char Left_wheel_link[] = "/Left_wheel_link";
-char Right_wheel_link[] = "/Right_wheel_link";
-char Ball_caster_front_link[] = "/Ball_caster_front_link";
-char Ball_caster_back_link[] = "/Ball_caster_back_link";
+char Back_left_wheel_link[] = "/Back_left_wheel_link";
+char Back_right_wheel_link[] = "/Back_right_wheel_link";
+char Ball_caster_left_link[] = "/Ball_caster_left_link";
+char Ball_caster_right_link[] = "/Ball_caster_right_link";
+char Lidar_link[]="/Lidar_link";
+char Metal_detector_arm_link[]="/Metal_detector_arm_link";
+
 
 
 #define M1IN1 27
@@ -46,6 +49,9 @@ char Ball_caster_back_link[] = "/Ball_caster_back_link";
 char* robot_id = "";
 sensor_msgs::JointState robot_state;
 char *a[] = {"Left_wheel_joint", "Right_wheel_joint","Ball_caster_front_joint","Ball_caster_back_joint"};  //R: Right - L: Left
+
+
+
 float pos[4]; /// stores arduino time
 float vel[4];
 float eff[4];
@@ -408,13 +414,21 @@ void  broadcasting_the_tf_trasform()
 //  broadcaster.sendTransform(t1);
 
   /*Broadcasting the transform between base_link and Left_wheel_link*/
-  
+      /*<origin
+      xyz="-0.0765 0.00190302448688115 0.00943214142854351"
+      rpy="-1.5707963267949 -1.17899991460539 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="Left_wheel_link" />*/
+
+
   Quaternion Q1,Q2;
   double a[4];
-  Q2=Q1.from_euler_rotation(-1.5707963267949, -1.17899991460539, 1.5707963267949);
+  Q2=Q1.from_euler_rotation(-1.5707963267949, -1.17899991460539, -1.5707963267949);
   
   t2.header.frame_id = base_link;
-  t2.child_frame_id = Left_wheel_link;
+  t2.child_frame_id = Back_left_wheel_link;
   t2.transform.translation.x = -0.0765;
   t2.transform.translation.y = 0.00190302448688115;
   t2.transform.translation.z = 0.00943214142854351;
@@ -426,13 +440,26 @@ void  broadcasting_the_tf_trasform()
   
   broadcaster.sendTransform(t2);
 
-  Q2=Q1.from_euler_rotation(1.5707963267949, -0.566329337388945, -1.5707963267949);
+ /*<joint
+    name="Back_right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.1766 -0.15065 0.019"
+      rpy="1.5708 1.322 3.142" />
+    <parent
+      link="base_link" />
+    <child
+      link="Back_right_wheel_link" />*/
+
+  Q2=Q1.from_euler_rotation(1.5707963267949, 1.322,3.1415927);
   
+
+
   t3.header.frame_id = base_link;
-  t3.child_frame_id = Right_wheel_link;
-  t3.transform.translation.x = 0.0764999999999999;
-  t3.transform.translation.y = 0.00190302448688115;
-  t3.transform.translation.z = 0.00943214142854353;
+  t3.child_frame_id = Back_right_wheel_link;
+  t3.transform.translation.x = -0.1766;
+  t3.transform.translation.y = -0.15065;
+  t3.transform.translation.z = 0.019;
   t3.transform.rotation.x = Q2.a;
   t3.transform.rotation.y = Q2.b; 
   t3.transform.rotation.z = Q2.c; 
@@ -441,14 +468,29 @@ void  broadcasting_the_tf_trasform()
   
   broadcaster.sendTransform(t3);
 
+  /*<joint
+    name="Lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.0209 0 0.171"
+      rpy="0 0 0" />
+      <!--<origin
+      xyz="0.0209 0 0.171"
+      rpy="1.5708 0 1.5707" />-->
+    <parent
+      link="base_link" />
+    <child
+      link="Lidar_link" />*/
 
-   Q2=Q1.from_euler_rotation(1.5707963267949, 0.0, 0.0);
+   Q2=Q1.from_euler_rotation(0.0, 0.0, 0.0);
   
+ 
+
   t4.header.frame_id = base_link;
-  t4.child_frame_id = Ball_caster_front_link;
-  t4.transform.translation.x = -0.0001379719182397;
-  t4.transform.translation.y = 0.0700435036565304;
-  t4.transform.translation.z = -0.014;
+  t4.child_frame_id = Lidar_link;
+  t4.transform.translation.x = 0.0209;
+  t4.transform.translation.y = 0.0;
+  t4.transform.translation.z = 0.171;
   t4.transform.rotation.x = Q2.a;
   t4.transform.rotation.y = Q2.b; 
   t4.transform.rotation.z = Q2.c; 
@@ -457,13 +499,23 @@ void  broadcasting_the_tf_trasform()
   
   broadcaster.sendTransform(t4);
 
-     Q2=Q1.from_euler_rotation(1.5707963267949, 0.0, 0.0);
+  /*<joint
+    name="Ball_caster_right_joint"
+    type="continuous">
+    <origin
+      xyz="0.06543 -0.07735 -0.04811"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Ball_caster_right_link" />*/
+  Q2=Q1.from_euler_rotation(1.5707963267949, 0.0, 0.0);
   
   t5.header.frame_id = base_link;
-  t5.child_frame_id = Ball_caster_back_link;
-  t5.transform.translation.x = -0.0001379719182397;
-  t5.transform.translation.y = -0.0700435036565304;
-  t5.transform.translation.z = -0.014;
+  t5.child_frame_id = Ball_caster_right_link;
+  t5.transform.translation.x = -0.06543;
+  t5.transform.translation.y = -0.07735;
+  t5.transform.translation.z = -0.04811;
   t5.transform.rotation.x = Q2.a;
   t5.transform.rotation.y = Q2.b; 
   t5.transform.rotation.z = Q2.c; 
@@ -471,6 +523,58 @@ void  broadcasting_the_tf_trasform()
   t5.header.stamp = nh.now();
   
   broadcaster.sendTransform(t5);
+
+ /*<joint
+    name="Ball_caster_left_joint"
+    type="continuous">
+    <origin
+      xyz="0.06543 0.07735 -0.04811"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Ball_caster_left_link" />*/
+
+  Q2=Q1.from_euler_rotation(1.5707963267949, 0.0, 0.0);
+ 
+  t6.header.frame_id = base_link;
+  t6.child_frame_id = Ball_caster_left_link;
+  t6.transform.translation.x = 0.06543;
+  t6.transform.translation.y = 0.07735;
+  t6.transform.translation.z = -0.04811;
+  t6.transform.rotation.x = Q2.a;
+  t6.transform.rotation.y = Q2.b; 
+  t6.transform.rotation.z = Q2.c; 
+  t6.transform.rotation.w = Q2.d;  
+  t6.header.stamp = nh.now();
+  
+  broadcaster.sendTransform(t6);
+ /*<joint
+    name="Metal_detector_plate_joint"
+    type="continuous">
+    <origin
+      xyz="0.11465 0.00025000000000001 -0.00924999999999999"
+      rpy="1.5707963267949 0 -3.08892219013656" />
+    <parent
+      link="base_link" />
+    <child
+      link="Metal_detector_arm_link" />*/
+
+ Q2=Q1.from_euler_rotation(1.5707963267949, 0.0, -3.08892219013656);
+  
+  t7.header.frame_id = base_link;
+  t7.child_frame_id = Metal_detector_arm_link;
+  t7.transform.translation.x = 0.11465;
+  t7.transform.translation.y = 0.00025000000000001;
+  t7.transform.translation.z = -0.00924999999999999;
+  t7.transform.rotation.x = Q2.a;
+  t7.transform.rotation.y = Q2.b; 
+  t7.transform.rotation.z = Q2.c; 
+  t7.transform.rotation.w = Q2.d;  
+  t7.header.stamp = nh.now();
+  
+  broadcaster.sendTransform(t7);
+
     /*Broadcasting the transform between base_link and Right_wheel_link*/
     /*Broadcasting the transform between base_link and Ball_caster_back_link*/
     /*Broadcasting the transform between base_link and Ball_caster_forward_link*/
