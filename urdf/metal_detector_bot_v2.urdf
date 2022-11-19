@@ -456,8 +456,8 @@
       <odometryFrame>odom</odometryFrame>
       <robotBaseFrame>base_link</robotBaseFrame>
       <!-- <publishWheelTF>true</publishWheelTF> -->
-      <publishOdomTF>true</publishOdomTF>
-      <publishWheelJointState>true</publishWheelJointState>
+      <publishOdomTF>false</publishOdomTF>
+      <publishWheelJointState>false</publishWheelJointState>
  
     </plugin>
 
