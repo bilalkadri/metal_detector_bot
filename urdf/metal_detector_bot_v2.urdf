@@ -71,7 +71,7 @@
     </collision>
   </link>
   <link
-    name="Back_right_wheel_link">
+    name="right_wheel_link">
     <inertial>
       <origin
         xyz="-6.24500451351651E-17 -8.32667268468867E-17 0.0262587770530892"
@@ -111,7 +111,7 @@
     </collision>
   </link>
   <joint
-    name="Back_right_wheel_joint"
+    name="right_wheel_joint"
     type="continuous">
     <origin
       xyz="-0.1766 -0.15065 0.019"
@@ -119,12 +119,12 @@
     <parent
       link="base_link" />
     <child
-      link="Back_right_wheel_link" />
+      link="right_wheel_link" />
     <axis
       xyz="0 0 1" />
   </joint>
   <link
-    name="Back_left_wheel_link">
+    name="left_wheel_link">
     <inertial>
       <origin
         xyz="-1.04083408558608E-17 1.11022302462516E-16 0.0262587770530892"
@@ -164,7 +164,7 @@
     </collision>
   </link>
   <joint
-    name="Back_left_wheel_joint"
+    name="left_wheel_joint"
     type="continuous">
     <origin
       xyz="-0.1766 0.15065 0.019"
@@ -172,7 +172,7 @@
     <parent
       link="base_link" />
     <child
-      link="Back_left_wheel_link" />
+      link="left_wheel_link" />
     <axis
       xyz="0 0 1" />
   </joint>
@@ -461,18 +461,15 @@
  
     </plugin>
 
-  <plugin name="gazebo_ros_control" filename="libgazebo_ros_contol.so">
+   <plugin name="gazebo_ros_control" filename="libgazebo_ros_contol.so">
         <!-- <robotNamespace>/</robotNamespace> -->
-  </plugin>
+   </plugin>
 
-  <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-      <!-- <jointName> Ball_caster_left_joint , Ball_caster_right_joint, Lidar_joint, Metal_detector_plate_joint
-      </jointName> -->
+   <!--<plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
      <jointName> Ball_caster_left_joint , Ball_caster_right_joint, Metal_detector_plate_joint
       </jointName>
+   </plugin>-->
 
-
-  </plugin>
-</gazebo>
+  </gazebo>
 
 </robot>

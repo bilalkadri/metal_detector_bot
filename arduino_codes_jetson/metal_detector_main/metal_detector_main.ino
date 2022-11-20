@@ -27,8 +27,8 @@ tf::TransformBroadcaster broadcaster;
 
 char base_link[] = "/base_link";
 char odom[] = "/odom";
-char Back_left_wheel_link[] = "/Back_left_wheel_link";
-char Back_right_wheel_link[] = "/Back_right_wheel_link";
+char Back_left_wheel_link[] = "/left_wheel_link";
+char Back_right_wheel_link[] = "/right_wheel_link";
 char Ball_caster_left_link[] = "/Ball_caster_left_link";
 char Ball_caster_right_link[] = "/Ball_caster_right_link";
 char Lidar_link[]="/Lidar_link";
@@ -48,14 +48,21 @@ char Metal_detector_arm_link[]="/Metal_detector_arm_link";
 //char* robot_id = "metal_detector_bot";
 char* robot_id = "";
 sensor_msgs::JointState robot_state;
-char *a[] = {"Left_wheel_joint", "Right_wheel_joint","Ball_caster_front_joint","Ball_caster_back_joint"};  //R: Right - L: Left
+char *a[] = {"left_wheel_joint", "right_wheel_joint","Ball_caster_left_joint","Ball_caster_right_joint","Metal_detector_plate_joint"};  //R: Right - L: Left
 
 
 
-float pos[4]; /// stores arduino time
-float vel[4];
-float eff[4];
+float pos[5]; /// stores arduino time
+float vel[5];
+float eff[5];
+#include <Servo.h>
 
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+int arm_pos = 0;    // variable to store the servo position
+int pos_min = 0;
+int pos_max = 125;
 ros::Publisher joint_states("joint_states", &robot_state);
 /*
 MinIMU-9-Arduino-AHRS
@@ -218,7 +225,8 @@ int rpwm_value = 0;
 int lpwm_value = 0;
 bool forward = LOW,backward = LOW,rturn = LOW,lturn= LOW;
 bool metal_detected = LOW;
-
+long current_millis = 0;
+long pre_millis = 0 ;
 ///////////////*****************//////////
 void cmd_vel( const geometry_msgs::Twist& twist_msg){
 if(twist_msg.linear.x>0)
@@ -291,10 +299,10 @@ double old_pos_x = 0;
 double old_pos_y = 0;
 double new_pos_x = 0;
 double new_pos_y = 0;
-float counts_per_rev = 5500;
+float counts_per_rev = 5600;
 float wheel_dia = 0.1524 ;                 //in meter
 float wheel_circ = PI*wheel_dia; //wheel cicumference
-float wheel_sep = 0.2794   ;             //wheel seperation in meter
+float wheel_sep = 0.35   ;             //wheel seperation in meter
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////Setup Function ////////////////////////////////////
@@ -323,62 +331,62 @@ pinMode(METALPIN,INPUT);
   nh.advertise(joint_states);
     broadcaster.init(nh);
     robot_state.header.frame_id = robot_id;
-  robot_state.name_length = 4;
+  robot_state.name_length = 5;
   robot_state.velocity_length = 2;
-  robot_state.position_length = 4; /// here used for arduino time
+  robot_state.position_length = 5; /// here used for arduino time
   robot_state.effort_length = 2; /// here used for arduino time
 
     robot_state.name = a;
-  
+   myservo.attach(7);  // attaches the servo on pin 9 to the servo object
 ///  pinMode (STATUS_LED,OUTPUT);  // Status LED
 
-  I2C_Init();
-
-  Serial.println("Pololu MinIMU-9 + Arduino AHRS");
-
-///  digitalWrite(STATUS_LED,LOW);
-  delay(1500);
-
-  Accel_Init();
-  Compass_Init();
-  Gyro_Init();
+//     I2C_Init();
+//
+//  Serial.println("Pololu MinIMU-9 + Arduino AHRS");
+//
+/////  digitalWrite(STATUS_LED,LOW);
+//  delay(1500);
+//
+//  Accel_Init();
+//  Compass_Init();
+//  Gyro_Init();
 
   
 
   delay(20);
 
-  for(int i=0;i<32;i++)    // We take some readings...
-    {
-       
-    Read_Gyro();
-    Read_Accel();
-     Serial.println("IMU INITIALIZED");
-    for(int y=0; y<6; y++)   // Cumulate values
-      AN_OFFSET[y] += AN[y];
-    delay(20);
-    }
-
-  for(int y=0; y<6; y++)
-    AN_OFFSET[y] = AN_OFFSET[y]/32;
-
-  AN_OFFSET[5]-=GRAVITY*SENSOR_SIGN[5];
-
-  Serial.println("Offset:");
-  for(int y=0; y<6; y++)
-    Serial.println(AN_OFFSET[y]);
-
-  delay(2000);
-  digitalWrite(STATUS_LED,HIGH);
-
-  timer=millis();
-  delay(20);
-  counter=0;
+//  for(int i=0;i<32;i++)    // We take some readings...
+//    {
+//       
+//    Read_Gyro();
+//    Read_Accel();
+//     Serial.println("IMU INITIALIZED");
+//    for(int y=0; y<6; y++)   // Cumulate values
+//      AN_OFFSET[y] += AN[y];
+//    delay(20);
+//    }
+//
+//  for(int y=0; y<6; y++)
+//    AN_OFFSET[y] = AN_OFFSET[y]/32;
+//
+//  AN_OFFSET[5]-=GRAVITY*SENSOR_SIGN[5];
+//
+//  Serial.println("Offset:");
+//  for(int y=0; y<6; y++)
+//    Serial.println(AN_OFFSET[y]);
+//
+//  delay(2000);
+//  digitalWrite(STATUS_LED,HIGH);
+//
+//  timer=millis();
+//  delay(20);
+//  counter=0;
 nh.spinOnce();
 
 //  now();
 //  robot_state.header.stamp = nh.now();
 
-
+myservo.write(0); 
 
  broadcasting_the_tf_trasform(); //Custom made function to publish all the transforms
 }
@@ -594,7 +602,7 @@ void  broadcasting_the_tf_trasform()
 //    
 //  }
 
-float vl=0.0,vr=0.0,wl=0.0,wr=0.0,r=0.075/2,theta_l=0.0,theta_r=0.0,theta_lo=0.0,theta_ro=0.0,w=0.0,theta=0,thetao=0.0,v=0.0;
+float vl=0.0,vr=0.0,wl=0.0,wr=0.0,r=(wheel_dia/2.0),theta_l=0.0,theta_r=0.0,theta_lo=0.0,theta_ro=0.0,w=0.0,theta=0.0,thetao=0.0,v=0.0;
 
 void loop() { 
 nh.spinOnce();
@@ -603,7 +611,7 @@ nh.spinOnce();
 // pos_cal();
 //  x = float(s)*(float(cos(theta))) + xo; 
 //  y = float(s)*(float(cos(theta))) + yo; 
-  Q2=Q1.from_euler_rotation(theta+1.5707,PI,0);
+  Q2=Q1.from_euler_rotation(theta+PI,PI,0);
   t1.header.frame_id = odom;
   t1.child_frame_id = base_link;
   t1.transform.translation.y = double(y); 
@@ -622,10 +630,11 @@ nh.spinOnce();
 //    robot_state.velocity = vel;
 //    robot_state.effort = eff;
     
-   RMR = (double(newPositionMR)/1770.0)*(2.0*3.146);
-   LMR = (double(newPositionML)/1770.0)*(2.0*3.146);
-    pos[0] = RMR;
-    pos[1] =LMR;
+   RMR = (double(newPositionMR)/double(counts_per_rev))*(2.0*3.146);
+   LMR = (double(newPositionML)/double(counts_per_rev))*(2.0*3.146);
+    pos[0] = LMR;
+    pos[1] = RMR;
+    pos[4] =0;
     vel[0]= 100;
     vel[1]= 100;
     eff[0]= 50;
@@ -660,6 +669,7 @@ nh.spinOnce();
   digitalWrite(M2IN1,HIGH);
   digitalWrite(M2IN2,LOW);
   analogWrite(M2PWM,80);
+  servo_arm(); 
    ENCNT(); 
   }
   else if (backward==HIGH) 
@@ -670,6 +680,7 @@ nh.spinOnce();
   digitalWrite(M2IN1,LOW);
   digitalWrite(M2IN2,HIGH);
   analogWrite(M2PWM,80);
+  servo_arm(); 
    ENCNT(); 
   }
   else if (rturn==HIGH) 
@@ -680,6 +691,7 @@ nh.spinOnce();
   digitalWrite(M2IN1,LOW);
   digitalWrite(M2IN2,HIGH);
   analogWrite(M2PWM,80);
+  servo_arm(); 
    ENCNT(); 
   }
   else if (lturn==HIGH) 
@@ -691,6 +703,7 @@ nh.spinOnce();
   digitalWrite(M2IN1,HIGH);
   digitalWrite(M2IN2,LOW);
   analogWrite(M2PWM,80);
+  servo_arm(); 
    ENCNT(); 
   }
  else { digitalWrite(M1IN1,HIGH);
@@ -702,43 +715,43 @@ nh.spinOnce();
 
   }
 //  delay(100);/
-  if((millis()-timer)>=20)  // Main loop runs at 50Hz
-  {
-    counter++;
-    timer_old = timer;
-    timer=millis();
-    if (timer>timer_old)
-    {
-      G_Dt = (timer-timer_old)/1000.0;    // Real time of loop run. We use this on the DCM algorithm (gyro integration time)
-      if (G_Dt > 0.2)
-        G_Dt = 0; // ignore integration times over 200 ms
-    }
-    else
-      G_Dt = 0;
-
-
-
-    // *** DCM algorithm
-    // Data adquisition
-    Read_Gyro();   // This read gyro data
-    Read_Accel();     // Read I2C accelerometer
-
-    if (counter > 5)  // Read compass data at 10Hz... (5 loop runs)
-    {
-      counter=0;
-      Read_Compass();    // Read I2C magnetometer
-      Compass_Heading(); // Calculate magnetic heading
-    }
-
-    // Calculations...
-    Matrix_update();
-    Normalize();
-    Drift_correction();
-    Euler_angles();
-    // ***
-
-//    printdata();
-  }
+//  if((millis()-timer)>=20)  // Main loop runs at 50Hz
+//  {
+//    counter++;
+//    timer_old = timer;
+//    timer=millis();
+//    if (timer>timer_old)
+//    {
+//      G_Dt = (timer-timer_old)/1000.0;    // Real time of loop run. We use this on the DCM algorithm (gyro integration time)
+//      if (G_Dt > 0.2)
+//        G_Dt = 0; // ignore integration times over 200 ms
+//    }
+//    else
+//      G_Dt = 0;
+//
+//
+//
+//    // *** DCM algorithm
+//    // Data adquisition
+////    Read_Gyro();   // This read gyro data
+////    Read_Accel();     // Read I2C accelerometer
+//
+//    if (counter > 5)  // Read compass data at 10Hz... (5 loop runs)
+//    {
+//      counter=0;
+//      Read_Compass();    // Read I2C magnetometer
+//      Compass_Heading(); // Calculate magnetic heading
+//    }
+//
+//    // Calculations...
+//    Matrix_update();
+//    Normalize();
+//    Drift_correction();
+//    Euler_angles();
+//    // ***
+//
+////    printdata();
+//  }
   ENCNT(); 
  last_time = current_time;
 }
@@ -781,8 +794,8 @@ void ENCNT()
 //    Serial.println(LMR);
 }
 
-void pos_cal()
-{
+//void pos_cal()
+//{
 // double left_wheel_dist = (double(newPositionML)/double(counts_per_rev))*double(wheel_circ);
 //  double right_wheel_dist = (double(newPositionMR)/double(counts_per_rev))*double(wheel_circ);
 //    s = (left_wheel_dist+right_wheel_dist)/2;
@@ -790,14 +803,14 @@ void pos_cal()
 
 //  theta = (theta*PI)/180.0;
   
-  }
+//  }
 
 
 
 void CAL_VL_VR()
 {
- theta_l  = (float(newPositionMR)/1770.0)*(2.0*3.146); // angular possition of the wheel
- theta_r = (float(newPositionML)/1770.0)*(2.0*3.146);
+ theta_r  = (float(newPositionMR)/counts_per_rev)*(2.0*3.146); // angular possition of the wheel
+ theta_l = (float(newPositionML)/counts_per_rev)*(2.0*3.146);
     
 current_time = millis();
 
@@ -811,13 +824,32 @@ vr = r*wr;
 //    Serial.print("   RIGHT WHEEL VELOCITY: "); Serial.println(vr); 
 
 w = (vr-vl)/wheel_sep;   // angular velocity of robot
-v = (vr+vl)/2;           // linear velocity of the robot
+v = (vr+vl)/2.0;           // linear velocity of the robot
  unsigned long Ts = current_time-last_time;
 theta = thetao + (w*Ts)/1000;
 thetao = theta;
 //Serial.print("   yaw angle of the robot: "); Serial.println(theta); 
-x = xo + (v*cos(theta)*Ts)/1000;
-y = yo + (v*sin(theta)*Ts)/1000;
+x = xo + (v*cos(double(theta))*Ts)/1000;
+y = yo + (v*sin(double(theta))*Ts)/1000;
    xo = x;
    yo = y;
 } 
+
+
+void servo_arm() {
+  
+  if ((current_millis - pre_millis >=30)&&(arm_pos<pos_max))// goes from 0 degrees to 180 degrees
+    {// in steps of 1 degree
+    arm_pos++;
+    myservo.write(arm_pos);              // tell servo to go to position in variable 'pos'
+                          // waits 15ms for the servo to reach the position
+   pre_millis = current_millis;
+  }
+ else if ((current_millis - pre_millis >=30)&&(arm_pos>0))// goes from 0 degrees to 180 degrees
+    {// in steps of 1 degree
+    arm_pos--;
+    myservo.write(arm_pos);              // tell servo to go to position in variable 'pos'
+                          // waits 15ms for the servo to reach the position
+   pre_millis = current_millis;
+  }
+}
